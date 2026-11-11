@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\ReportController;
 use App\Livewire\Dashboard;
 use App\Livewire\Drivers\DriverList;
 use App\Livewire\Fuel\FuelList;
@@ -35,5 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/repairs', RepairList::class)->name('repairs.index');
     Route::get('/fuel', FuelList::class)->name('fuel.index');
     Route::get('/reports', ReportPage::class)->name('reports.index');
+    Route::get('/reports/export/pdf', [ReportController::class, 'exportPdf'])->name('reports.export.pdf');
+    Route::get('/reports/export/excel', [ReportController::class, 'exportExcel'])->name('reports.export.excel');
     Route::get('/settings', SettingsPage::class)->name('settings.index');
 });
