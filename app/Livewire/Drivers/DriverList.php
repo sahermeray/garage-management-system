@@ -28,7 +28,11 @@ class DriverList extends Component
     public string $deleteError = '';
 
     /** @var array<string, string> */
-    protected $listeners = ['driver-saved' => 'driverSaved'];
+    protected $listeners = [
+        'driver-saved' => 'driverSaved',
+        'open-create-driver' => 'createDriver',
+        'close-modal' => 'closeModal',
+    ];
 
     public function updatingSearch(): void
     {

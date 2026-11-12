@@ -32,7 +32,11 @@ class VehicleList extends Component
     public string $deleteError = '';
 
     /** @var array<string, string> */
-    protected $listeners = ['vehicle-saved' => 'vehicleSaved'];
+    protected $listeners = [
+        'vehicle-saved' => 'vehicleSaved',
+        'open-create-vehicle' => 'createVehicle',
+        'close-modal' => 'closeModal',
+    ];
 
     public function updatingSearch(): void
     {

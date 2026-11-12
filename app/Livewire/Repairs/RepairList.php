@@ -33,7 +33,11 @@ class RepairList extends Component
     public ?int $editingRepairId = null;
 
     /** @var array<string, string> */
-    protected $listeners = ['repair-saved' => 'repairSaved'];
+    protected $listeners = [
+        'repair-saved' => 'repairSaved',
+        'open-create-repair' => 'createRepair',
+        'close-modal' => 'closeModal',
+    ];
 
     public function updatingSearch(): void
     {

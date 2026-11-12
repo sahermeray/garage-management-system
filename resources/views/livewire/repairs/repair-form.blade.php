@@ -231,7 +231,7 @@
             <div class="flex justify-end">
                 <div class="bg-blue-50 border border-blue-200 rounded-lg px-6 py-3 flex items-center gap-3">
                     <span class="text-sm font-medium text-blue-700">المجموع الكلي:</span>
-                    <span class="text-xl font-bold text-blue-800">{{ number_format($totalCost, 0) }} ل.ع</span>
+                    <span class="text-xl font-bold text-blue-800">{{ number_format($totalCost, 0) }} ل.س</span>
                 </div>
             </div>
         </div>

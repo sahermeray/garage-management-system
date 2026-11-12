@@ -1,6 +1,6 @@
 <div>
     <x-slot name="actions">
-        <button wire:click="createFuel"
+        <button onclick="Livewire.dispatch('open-create-fuel')"
                 class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -71,9 +71,9 @@
                                 </td>
                                 <td class="px-4 py-3 text-gray-700">{{ $record->date->format('Y/m/d') }}</td>
                                 <td class="px-4 py-3 text-gray-700">{{ number_format((float) $record->liters, 2) }}</td>
-                                <td class="px-4 py-3 text-gray-700">{{ number_format((float) $record->price_per_liter, 0) }} ل.ع</td>
+                                <td class="px-4 py-3 text-gray-700">{{ number_format((float) $record->price_per_liter, 0) }} ل.س</td>
                                 <td class="px-4 py-3 text-gray-700 font-medium">
-                                    {{ number_format((float) $record->total_cost, 0) }} ل.ع
+                                    {{ number_format((float) $record->total_cost, 0) }} ل.س
                                 </td>
                                 <td class="px-4 py-3 text-gray-700">
                                     {{ $record->odometer !== null ? number_format($record->odometer) . ' كم' : '—' }}

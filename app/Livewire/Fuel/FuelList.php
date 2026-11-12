@@ -33,7 +33,11 @@ class FuelList extends Component
     public ?int $editingFuelId = null;
 
     /** @var array<string, string> */
-    protected $listeners = ['fuel-saved' => 'fuelSaved'];
+    protected $listeners = [
+        'fuel-saved' => 'fuelSaved',
+        'open-create-fuel' => 'createFuel',
+        'close-modal' => 'closeModal',
+    ];
 
     public function updatingSearch(): void
     {

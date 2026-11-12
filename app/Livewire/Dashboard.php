@@ -47,23 +47,22 @@ class Dashboard extends Component
             ->get();
 
         // Top 5 vehicles by total expenses this month
+        // Use correlated subqueries instead of LEFT JOINs to avoid row multiplication
+        // (a vehicle with N repairs and M fuel records would otherwise produce N×M rows,
+        //  inflating each SUM by the opposite table's row count)
         $topVehiclesByExpenses = Vehicle::query()
             ->select('vehicles.id', 'vehicles.institutional_number', 'vehicles.manufacturer', 'vehicles.model')
-            ->leftJoin('repairs', function ($join) use ($monthStart, $monthEnd) {
-                $join->on('repairs.vehicle_id', '=', 'vehicles.id')
-                    ->whereBetween('repairs.repair_date', [$monthStart, $monthEnd]);
-            })
-            ->leftJoin('fuel_records', function ($join) use ($monthStart, $monthEnd) {
-                $join->on('fuel_records.vehicle_id', '=', 'vehicles.id')
-                    ->whereBetween('fuel_records.date', [$monthStart, $monthEnd]);
-            })
-            ->selectRaw('COALESCE(SUM(repairs.total_cost), 0) + COALESCE(SUM(fuel_records.total_cost), 0) as total_expenses')
-            ->groupBy('vehicles.id', 'vehicles.institutional_number', 'vehicles.manufacturer', 'vehicles.model')
+            ->selectRaw('
+                COALESCE((SELECT SUM(r.total_cost) FROM repairs r WHERE r.vehicle_id = vehicles.id AND r.repair_date BETWEEN ? AND ?), 0)
+                +
+                COALESCE((SELECT SUM(f.total_cost) FROM fuel_records f WHERE f.vehicle_id = vehicles.id AND f.date BETWEEN ? AND ?), 0)
+                as total_expenses
+            ', [$monthStart, $monthEnd, $monthStart, $monthEnd])
             ->orderByDesc('total_expenses')
             ->limit(5)
             ->get();
 
-        $currency = Setting::get('currency', 'ل.ع');
+        $currency = Setting::get('currency', 'ل.س');
 
         return view('livewire.dashboard', [
             'totalVehicles' => $totalVehicles,

@@ -39,7 +39,11 @@ class TripList extends Component
     public string $deleteError = '';
 
     /** @var array<string, string> */
-    protected $listeners = ['trip-saved' => 'tripSaved'];
+    protected $listeners = [
+        'trip-saved' => 'tripSaved',
+        'open-create-trip' => 'createTrip',
+        'close-modal' => 'closeModal',
+    ];
 
     public function updatingSearch(): void
     {

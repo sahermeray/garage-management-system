@@ -21,7 +21,7 @@ class SettingsPage extends Component
     public function mount(): void
     {
         $this->institutionName = (string) Setting::get('institution_name', '');
-        $this->currency = (string) Setting::get('currency', 'ل.ع');
+        $this->currency = (string) Setting::get('currency', 'ل.س');
     }
 
     public function save(): void

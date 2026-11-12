@@ -11,7 +11,7 @@ class SettingSeeder extends Seeder
     {
         $settings = [
             ['key' => 'institution_name', 'value' => 'الجهة الحكومية'],
-            ['key' => 'currency', 'value' => 'ل.ع'],
+            ['key' => 'currency', 'value' => 'ل.س'],
         ];
 
         foreach ($settings as $setting) {
